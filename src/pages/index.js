@@ -7,8 +7,7 @@ export default function Home() {
                 <div className="flex flex-col gap-4 text-center items-center w-full">
                     <p className="text-2xl font-semibold">Willkommen auf KI-Kompass</p>
                     <p className="text-center text-lg text-gray-600">
-                        Auf dieser Website kannst du dein Wissen über KI in der
-                        Unterrichtsplanung überprüfen, gezielt vorhandene
+                        Auf dieser Website kannst du dein Wissen über KI überprüfen, gezielt vorhandene
                         Wissenslücken schließen und praxisnahe Anwendungsfälle
                         kennenlernen. Schritt für Schritt zeigen wir dir, wie du
                         KI-gestützte Tools effektiv einsetzen kannst, um deine
@@ -16,7 +15,7 @@ export default function Home() {
                         verbessern.
                     </p>
                 </div>
-                <div className="flex gap-4 grow">
+                <div className="flex xl:flex-row flex-col gap-4 grow mt-8">
                     <HomeCard
                         title={"Wissenstest"}
                         description={

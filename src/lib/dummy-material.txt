@@ -1,0 +1,43 @@
+Hier sind beispielhafte Inputs für jedes der angezeigten Textfelder, passend zum Thema **Photosynthese und ihre Bedeutung für das Leben auf der Erde**:
+### **Schritt 1 - Klasse**  
+**Input:**  
+„Das Material richtet sich an eine 10. Klasse einer Gesamtschule im Fach Biologie. Die Klasse besteht aus 25 Schülerinnen und Schülern, mit durchschnittlichem Vorwissen zu pflanzlichen Organismen und einer heterogenen Leistungsstärke. Die Schüler haben bereits Grundlagen zur Zellbiologie und Energiegewinnung behandelt.“
+
+---
+
+### **Schritt 2 - Zielsetzung**  
+**Input:**  
+„Die Schülerinnen und Schüler sollen den Prozess der Photosynthese verstehen, die Rolle von Sonnenlicht, Wasser und CO₂ erkennen und ihre Bedeutung für das Leben auf der Erde erklären. Sie sollen zudem den Zusammenhang zwischen Photosynthese und der Sauerstoffproduktion sowie der Nahrungskette nachvollziehen. Kompetenzen im logischen Analysieren und Formulieren wissenschaftlicher Inhalte werden gefördert.“
+
+---
+
+### **Schritt 3 - Thema**  
+**Input:**  
+„Photosynthese und ihre Bedeutung für das Leben auf der Erde.“
+
+---
+
+### **Schritt 4 - Bearbeitungszeit**  
+**Input:**  
+„Die Schülerinnen und Schüler sollten für die Bearbeitung des Arbeitsmaterials etwa 15 Minuten benötigen. Für anschließende Diskussionen und Reflexionen im Plenum können zusätzlich 10 Minuten eingeplant werden.“
+
+---
+
+### **Schritt 5 - Materialtyp**  
+**Input:**  
+„Erstelle einen Lückentext zum Thema Photosynthese, der auf folgendem Inhalt basiert:  
+‚Die Photosynthese ist der Prozess, bei dem Pflanzen mithilfe von __________ und __________ aus __________ und __________ energiereiche Glukose herstellen. Dabei entsteht als Nebenprodukt __________, das für viele Lebewesen lebenswichtig ist. Dieser Prozess findet in den __________ der Pflanzen statt.‘  
+Der Lückentext soll das Verständnis für die grundlegenden Schritte der Photosynthese fördern und auf mittlerem Niveau sein.“
+
+---
+
+### **Schritt 6 - Spezifikationen**  
+**Input:**  
+„Das Arbeitsmaterial sollte folgende Spezifikationen enthalten:  
+1. Interaktive Elemente wie einen Lückentext zur Festigung des Gelernten.  
+2. Praktische Beispiele aus dem Alltag (z. B. die Bedeutung von Pflanzen für Sauerstoffproduktion und Ernährung).  
+3. Ein kurzer Lesetext zu den Phasen der Photosynthese für Schülerinnen und Schüler mit geringerem Vorwissen.  
+4. Erweiterte Aufgaben (z. B. die Rolle der Photosynthese im Klimawandel) für leistungsstärkere Schüler.  
+5. Ein Reflexionsteil, der die Bedeutung der Photosynthese für die Ökosysteme zusammenfasst.“
+
+---

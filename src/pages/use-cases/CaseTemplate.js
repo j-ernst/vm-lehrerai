@@ -12,7 +12,7 @@ export default function CaseTemplate ({ imgSrc, title, detailDescription, childr
                 </Link>
                 <Image className="w-full rounded-lg" src={imgSrc} width={500} height={300} alt={'Photo'}/>
                 <p className="text-2xl mt-8 font-bold">{title}</p>
-                <p className="leading-8 text-md mt-4 text-gray-700 mb-4">{detailDescription}</p>
+                <p className="leading-8 text-lg mt-4 text-gray-700 mb-8">{detailDescription}</p>
                 {children}
             </div>
         </div>

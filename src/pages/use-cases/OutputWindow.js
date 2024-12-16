@@ -17,8 +17,8 @@ export default function OutputWindow({ response, isLoading }) {
                 {isLoading ? (
                     <p className="text-sm text-gray-500 animate-pulse text-center">Lädt...</p>
                 ) : response ? (
-                    <ReactMarkdown 
-                        className="prose prose-blue w-full" 
+                    <ReactMarkdown
+                        className="prose prose-blue w-full max-w-none p-8" // max-w-none removes Tailwind's max-width restriction
                         remarkPlugins={[remarkGfm]}
                     >
                         {cleanResponse(response)}

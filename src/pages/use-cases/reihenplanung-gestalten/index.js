@@ -75,7 +75,8 @@ export default function ReihenplanungGestalten() {
     const generatePrompt = (steps, inputs) => {
         const inputsWithContent = steps.map((step, index) => {
             const userInput = inputs[`step${index + 1}`];
-            return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${userInput}`;
+            const content = userInput || step.placeholder;
+            return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${content}`;
         }).join("\n\n");
     
         return `

@@ -10,7 +10,7 @@ export default function App({Component, pageProps}) {
         <title>KI-Kompass</title>
         <meta name="description" content="Teacher AI" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/compass-black.svg" />
       </Head>
       <AppContext.Provider value={''}>
         <Component {...pageProps} />
