@@ -16,12 +16,12 @@
 
 @layer base {
   html {
-    @apply subpixel-antialiased text-gray-900 font-medium text-opacity-100;
-    -webkit-font-smoothing: none; /* Turn off font smoothing */
-    -moz-osx-font-smoothing: auto;
-    text-rendering: geometricPrecision; /* Prioritize sharp rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
+
 
 body {
   color: var(--foreground);
