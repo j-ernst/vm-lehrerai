@@ -50,7 +50,7 @@ export default function Card({ content }) {
             {/* Inhalt */}
             <div className="p-5 h-32 flex flex-col justify-between">
                 <div>
-                    <h1 className="font-bold text-lg">{title}</h1>
+                    <h1 className="font-bold text-lg text-black">{title}</h1>
                     <p className="text-gray-500 text-sm">{description}</p>
                 </div>
             </div>

@@ -10,7 +10,7 @@ export default function StepInput({
 }) {
   return (
     <div className="mb-6 p-4 border rounded-lg shadow-sm">
-      <h3 className="text-lg font-semibold">{title}</h3>
+      <h3 className="text-lg text-black font-semibold">{title}</h3>
       <p className="text-base text-gray-600 mb-4">{description}</p>
 
       {allowDocumentUpload ? (

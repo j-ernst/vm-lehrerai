@@ -6,7 +6,7 @@ export default function QuizSection({ index, question, options, explanation, sel
             }`}
             style={{ borderWidth: result ? "2px" : "1px" }}
         >
-            <h3 className="text-lg font-semibold mb-4">
+            <h3 className="text-lg text-black font-semibold mb-4">
                 Frage {index}: {question || "Frage nicht verfügbar"}
             </h3>
             <form className="space-y-3">
