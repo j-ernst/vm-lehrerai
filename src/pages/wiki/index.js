@@ -172,7 +172,7 @@ export default function Wiki() {
             <div className="w-full max-w-5xl">
                 {/* Inhaltsverzeichnis */}
                 <div className="bg-blue-100 shadow-md rounded-lg p-6 mb-8">
-                    <h2 className="text-2xl font-semibold mb-4">Inhaltsverzeichnis</h2>
+                    <h2 className="text-2xl text-black font-semibold mb-4">Inhaltsverzeichnis</h2>
                     <ul className="space-y-2">
                         {sections.map((section) => (
                             <li key={section.id}>
