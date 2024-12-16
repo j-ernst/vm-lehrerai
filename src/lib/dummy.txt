@@ -1,0 +1,31 @@
+Klasse
+Eingabe:
+„Die Unterrichtsreihe richtet sich an eine 10. Klasse einer Gesamtschule im Fach Biologie. Die Klasse besteht aus 25 Schülerinnen und Schülern, mit einer durchschnittlichen Leistungsspanne und unterschiedlichen Interessen an Naturwissenschaften.“
+
+Thema
+Eingabe:
+„Photosynthese und ihre Bedeutung für das Leben auf der Erde.“
+
+Zielsetzung
+Eingabe:
+„Die Schülerinnen und Schüler sollen den Prozess der Photosynthese verstehen, ihre Bedeutung für Pflanzen und die Umwelt erkennen sowie in der Lage sein, diesen Prozess in eigenen Worten zu erklären. Sie sollen außerdem Kompetenzen im Experimentieren und Analysieren wissenschaftlicher Daten entwickeln.“
+
+Lehrplan als Orientierung hochladen
+Eingabe (als Text):
+_„Die Themen sollen den Lehrplananforderungen für die 10. Klasse Biologie entsprechen, einschließlich:
+
+Zelluläre Prozesse, insbesondere Photosynthese.
+Ökologische Zusammenhänge.
+Praktische Experimente zur Untersuchung von Licht und Kohlendioxid in der Photosynthese.“_
+
+Vergangene Unterrichtsreihe als Referenz hochladen
+Eingabe (als Text):
+„In der letzten Unterrichtsreihe haben wir das Thema ‚Zellstruktur und -funktionen‘ behandelt. Die Klasse kennt bereits grundlegende Begriffe wie Chloroplasten, Zellatmung und chemische Reaktionen.“
+
+Zeitraum
+Eingabe:
+„Die Unterrichtsreihe soll über 4 Wochen laufen und in zwei 90-minütigen Unterrichtseinheiten pro Woche umgesetzt werden.“
+
+Spezifikationen
+Eingabe:
+„Die Unterrichtsreihe sollte interaktive Elemente wie Gruppenarbeiten und praktische Experimente beinhalten. Es soll darauf geachtet werden, dass Inhalte für Schülerinnen und Schüler mit unterschiedlichen Leistungsniveaus zugänglich sind. Außerdem sollten Aufgaben für besonders interessierte Schülerinnen und Schüler angeboten werden. Eine exemplarische Klausurvorbereitung in der letzten Woche wäre wünschenswert.“
