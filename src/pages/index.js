@@ -5,7 +5,7 @@ export default function Home() {
         <div className="flex-grow flex h-[calc(100vh-112px)] justify-center items-center">
             <div className="flex flex-col gap-8 max-w-[1200px] w-[60vw] h-[60vh] rounded-lg items-center justify-center">
                 <div className="flex flex-col gap-4 text-center items-center w-full">
-                    <p className="text-2xl font-semibold">Willkommen auf KI-Kompass</p>
+                    <p className="text-2xl font-semibold text-black">Willkommen auf KI-Kompass</p>
                     <p className="text-center text-lg text-gray-600">
                         Auf dieser Website kannst du dein Wissen über KI überprüfen, gezielt vorhandene
                         Wissenslücken schließen und praxisnahe Anwendungsfälle
