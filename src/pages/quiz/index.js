@@ -128,7 +128,7 @@ export default function Quiz (){
     return (
         <div className="flex flex-col items-center w-screen mb-20">
             <div className="mt-20 w-[60vw] flex flex-col items-center">
-                <p className="text-3xl text-center">Quiz</p>
+                <p className="text-3xl text-black text-center">Quiz</p>
                 <div className="mt-4">
                     {quizContent.map((q, index) => (
                         <QuizSection
