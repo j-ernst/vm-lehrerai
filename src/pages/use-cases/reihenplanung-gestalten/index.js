@@ -104,12 +104,10 @@ export default function ReihenplanungGestalten() {
 
     const handleSubmit = async () => {
         try {
-            setIsLoading(true); // Start loading
-            console.log("Collected Inputs:", inputs);
+            setIsLoading(true); // Start loading            
 
             // Generate the prompt
-            const prompt = generatePrompt(steps, inputs);
-            console.log(prompt);
+            const prompt = generatePrompt(steps, inputs);            
 
             // Send the request to the local API
             const res = await axios.post('/api/chat', { message: prompt }, {
@@ -133,8 +131,7 @@ export default function ReihenplanungGestalten() {
         }
 
         try {
-            setIsLoading(true);
-            console.log("Refining with input:", refineInput);
+            setIsLoading(true);            
 
             const refinePrompt = `
                 Hier ist der vorherige Kontext und das generierte Ergebnis:

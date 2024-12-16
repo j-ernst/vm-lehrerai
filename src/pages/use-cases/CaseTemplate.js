@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function CaseTemplate ({ imgSrc, title, detailDescription, children}){
-    console.log(imgSrc)
     return (
         <div className="w-screen flex justify-center">
             <div className="flex-col m-20 w-[90vw] lg:w-[70vw] max-w-[1200px]">
