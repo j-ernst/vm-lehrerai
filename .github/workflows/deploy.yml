@@ -3,7 +3,7 @@ name: Deploy Next.js to Server
 on:
   push:
     branches:
-      - main  # Ändern, falls du einen anderen Branch deployen willst
+      - main  # Deploy wird ausgelöst, wenn auf main gepusht wird
 
 jobs:
   deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Anpassen an deine Node-Version
+          node-version: '20'
 
       - name: Install Dependencies
         run: npm install
@@ -30,8 +30,9 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}   # Hier wird der Port angegeben
           source: ".,!node_modules"
-          target: "/var/www/ollipolli.de/public_html/nextjs-app"
+          target: "/var/www/nextjs-app"
 
       - name: Restart Application
         uses: appleboy/ssh-action@v1.0.0
@@ -39,7 +40,8 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}   # Port für SSH-Verbindung
           script: |
-            cd /var/www/ollipolli.de/public_html/nextjs-app
+            cd /var/www/nextjs-app
             npm install --production
             pm2 restart nextjs-app || pm2 start npm --name "nextjs-app" -- start
