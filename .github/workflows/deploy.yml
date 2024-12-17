@@ -32,7 +32,7 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}   # Hier wird der Port angegeben
           source: ".,!node_modules"
-          target: "/var/www/nextjs-app"
+          target: "/var/www/ollipolli.de/public_html/nextjs-app"
 
       - name: Restart Application
         uses: appleboy/ssh-action@v1.0.0
@@ -42,6 +42,6 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}   # Port für SSH-Verbindung
           script: |
-            cd /var/www/nextjs-app
+            cd /var/www/ollipolli.de/public_html/nextjs-app
             npm install --production
             pm2 restart nextjs-app || pm2 start npm --name "nextjs-app" -- start
