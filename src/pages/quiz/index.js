@@ -4,110 +4,115 @@ import { useState } from "react";
 export default function Quiz (){
     const quizContent = [
         {
-            question: "Was bedeutet die Abkürzung KI in Bezug auf generative Technologien?",
-            options: ["Komplexe Informationsverarbeitung", "Künstliche Intelligenz", "Kognitive Integration", "Kollektive Ideenfindung"],
-            answer: 1,
-            explanation: "KI steht für 'Künstliche Intelligenz', eine Technologie, die menschenähnliche Aufgaben wie Lernen, Problemlösung und Kreativität ausführt."
-        },
-        {
-            question: "Wie könnte generative KI in Schulen verwendet werden, ohne die Rolle der Lehrkraft zu ersetzen?",
+            question: "Was ist das Hauptziel von Maschinellem Lernen (ML)?",
             options: [
-                "Durch vollständige Automatisierung von Unterrichtsplänen",
-                "Durch die Unterstützung bei der Erstellung individueller Lernaufgaben",
-                "Durch das Ersetzen von Prüfungen durch KI-generierte Aufgaben",
-                "Durch die Analyse von Lehrverhalten zur Effizienzsteigerung"
+                "Die manuelle Programmierung jedes Prozesses durch Entwickler",
+                "Das eigenständige Lernen und Verbessern von Modellen basierend auf Daten",
+                "Das Trainieren neuronaler Netze, um Bilder zu analysieren",
+                "Die Eliminierung menschlicher Fehler in Algorithmen"
             ],
             answer: 1,
-            explanation: "Generative KI kann Lehrkräfte unterstützen, indem sie individuelle Lernmaterialien erstellt, ohne den pädagogischen Einfluss der Lehrkraft zu verdrängen."
+            explanation: "Maschinelles Lernen ermöglicht Maschinen, eigenständig aus Daten zu lernen und sich ohne explizite Programmierung zu verbessern."
         },
         {
-            question: "Welcher Nachteil generativer KI wird oft übersehen?",
+            question: "Welche Art von Modellen wird speziell zur Erzeugung von Inhalten wie Texten oder Bildern eingesetzt?",
             options: [
-                "Hohe Rechenleistung verursacht höhere Kosten",
-                "Generierte Inhalte können unbemerkt Vorurteile enthalten",
-                "Die Technologie ist schwer zugänglich für Lehrer",
-                "Es werden nur wissenschaftliche Inhalte generiert"
-            ],
-            answer: 1,
-            explanation: "Generative KI kann Vorurteile aus den Trainingsdaten übernehmen, was zu problematischen Inhalten führen kann, die nicht leicht erkennbar sind."
-        },
-        {
-            question: "Wie kann generative KI bei der Förderung von Sprachenlernen unterstützen?",
-            options: [
-                "Durch die Bereitstellung einheitlicher Grammatikregeln",
-                "Durch die automatische Übersetzung und Kontextanpassung von Texten",
-                "Durch die Erstellung von Prüfungen in mehreren Sprachen",
-                "Durch die Verwaltung von Sprachlernprogrammen"
-            ],
-            answer: 1,
-            explanation: "Generative KI kann durch automatische Übersetzung und kontextbasierte Anpassung den Lernprozess individualisieren und erleichtern."
-        },
-        {
-            question: "Was könnte eine langfristige Folge der Integration generativer KI in den Bildungssektor sein?",
-            options: [
-                "Einheitliche Lernmethoden für alle Schulen",
-                "Reduzierung der Bedeutung von Lehrkräften",
-                "Verlust von Kreativität bei Schülern und Lehrern",
-                "Erhöhte Abhängigkeit von algorithmisch erstelltem Wissen"
+                "Supervised Learning Modelle, die aus gelabelten Daten lernen",
+                "Neuronale Netze, die Daten in Schichten analysieren",
+                "Unsupervised Learning Modelle, die Muster ohne Labels erkennen",
+                "Generative Modelle, die auf Basis von Trainingsdaten Inhalte erzeugen"
             ],
             answer: 3,
-            explanation: "Die starke Nutzung generativer KI könnte eine Abhängigkeit von algorithmischen Lösungen schaffen, die kritisches Denken und Eigenständigkeit beeinträchtigen."
+            explanation: "Generative Modelle wie GPT sind darauf ausgelegt, basierend auf Trainingsdaten neue Inhalte wie Texte oder Bilder zu erstellen."
         },
         {
-            question: "Welcher Aspekt generativer KI birgt das größte Potenzial, aber auch die größten Risiken für den Unterricht?",
+            question: "Wie verbessert man die Qualität der Ausgabe eines KI-Modells durch Prompting?",
             options: [
-                "Das Generieren interaktiver Inhalte",
-                "Die Fähigkeit, selbstständig Unterrichtskonzepte zu entwickeln",
-                "Das Anbieten von vollständig angepassten Lösungen für Schüler",
-                "Die Integration von KI-Feedback in Schülerbewertungen"
+                "Indem man komplexe und detaillierte Anweisungen kombiniert",
+                "Indem man präzise Anweisungen mit relevantem Kontext bereitstellt",
+                "Indem man dem Modell möglichst viele Eingaben auf einmal gibt",
+                "Indem man dem Modell zeigt, wie es Daten selbst analysieren kann"
             ],
-            answer: 2,
-            explanation: "Angepasste Lösungen können die Lernerfahrung verbessern, bergen jedoch das Risiko, Schüler zu stark von der KI abhängig zu machen."
+            answer: 1,
+            explanation: "Eine präzise und klare Formulierung mit ausreichendem Kontext führt zu besseren Ergebnissen beim Prompting."
         },
         {
-            question: "In welchem Fall könnte der Einsatz generativer KI unethisch sein?",
+            question: "Welche Kompetenz ist für Lehrkräfte besonders wichtig, um KI verantwortungsvoll im Unterricht einzusetzen?",
             options: [
-                "Wenn Lernmaterialien ohne Prüfung der Quellen erstellt werden",
-                "Wenn Schüler durch automatisierte Systeme bewertet werden",
-                "Wenn Lehrer gezwungen werden, die KI zu verwenden",
-                "Wenn die KI komplexe Inhalte einfacher darstellt"
+                "Kenntnisse in der Entwicklung neuer Algorithmen",
+                "Verständnis für ethische Fragestellungen wie Bias und Datenschutz",
+                "Die Fähigkeit, große Datenmengen effizient zu analysieren",
+                "Erfahrung in der Programmierung neuronaler Netze"
+            ],
+            answer: 1,
+            explanation: "Ethisches Bewusstsein hilft Lehrkräften, die Nutzung von KI kritisch zu hinterfragen und potenzielle Risiken zu minimieren."
+        },
+        {
+            question: "Welcher Ansatz hilft, systematische Verzerrungen (Bias) in KI-Modellen zu reduzieren?",
+            options: [
+                "Das Training der Modelle mit zufällig ausgewählten Daten",
+                "Die Sicherstellung von Diversität und Repräsentativität in den Trainingsdaten",
+                "Die Verwendung kleinerer Datensätze zur besseren Kontrolle",
+                "Die Anwendung nur auf vordefinierte Aufgaben mit geringer Komplexität"
+            ],
+            answer: 1,
+            explanation: "Diversität in den Trainingsdaten stellt sicher, dass Modelle eine breitere und repräsentativere Basis haben, wodurch Bias reduziert wird."
+        },
+        {
+            question: "Welche Nutzung von KI im Bildungswesen wäre ethisch sehr problematisch?",
+            options: [
+                "Automatisierte Bewertungen ohne menschliche Überprüfung",
+                "Personalisierte Lernpläne, die Schülerbedürfnisse berücksichtigen",
+                "Die Erstellung von Quizfragen basierend auf Lehrplänen",
+                "Die Analyse von Schülerleistungen zur Förderung des Lernens"
             ],
             answer: 0,
-            explanation: "Ohne eine sorgfältige Überprüfung der Quellen könnten generierte Inhalte Fehlinformationen enthalten oder unausgewogen sein."
+            explanation: "Automatisierte Bewertungen ohne menschliche Kontrolle können zu unfairen Ergebnissen führen und mangelnde Transparenz aufweisen."
         },
-        {
-            question: "Was ist eine subtile Gefahr beim Einsatz generativer KI im Bildungsbereich?",
+        /*{
+            question: "Wie kann KI Lehrkräfte effizient bei der Erstellung von Lehrmaterialien unterstützen?",
             options: [
-                "Lehrkräfte könnten ihre Rolle verlieren",
-                "Schüler könnten Inhalte konsumieren, ohne sie kritisch zu hinterfragen",
-                "Generierte Inhalte könnten alle Schulbücher ersetzen",
-                "Die Integration der KI könnte zu langsamen Systemen führen"
+                "Durch die Erstellung von vorgefertigten Bewertungen",
+                "Durch die automatisierte Generierung von Quizfragen und Übungen",
+                "Durch die Überwachung von Schülerverhalten im Klassenzimmer",
+                "Durch die Integration von Algorithmen zur Vorhersage von Lernergebnissen"
             ],
             answer: 1,
-            explanation: "Schüler könnten generierte Inhalte passiv übernehmen, ohne sie kritisch zu hinterfragen, was ihre Fähigkeit zum eigenständigen Denken beeinträchtigen könnte."
+            explanation: "KI kann Lehrkräfte entlasten, indem sie Aufgaben wie die Erstellung von Quizfragen automatisiert übernimmt."
         },
         {
-            question: "Welches Problem könnte auftreten, wenn generative KI personalisierte Lernpläne erstellt?",
+            question: "Warum ist Datenschutz bei der Nutzung von KI im Schulumfeld besonders wichtig?",
             options: [
-                "Die Pläne könnten zu komplex für Schüler sein",
-                "Lehrkräfte könnten die Kontrolle über den Lernprozess verlieren",
-                "Es könnten Lernlücken aufgrund ungenauer Daten entstehen",
-                "Schüler könnten nicht von einheitlichen Inhalten profitieren"
+                "Weil sensible Schülerdaten geschützt werden müssen",
+                "Weil KI gesetzliche Anforderungen zur Datensicherheit nicht erfüllt",
+                "Weil KI auf große Datenmengen angewiesen ist",
+                "Weil die Kosten für Datenschutzmaßnahmen hoch sind"
             ],
-            answer: 2,
-            explanation: "Wenn die Datenbasis ungenau ist, können personalisierte Pläne fehlerhaft sein, was zu Lernlücken führen könnte."
+            answer: 0,
+            explanation: "Der Schutz sensibler Schülerdaten ist entscheidend, um das Vertrauen von Schülern und Eltern zu gewährleisten."
         },
         {
-            question: "Welche Rolle sollte generative KI in der Zukunft des Bildungswesens einnehmen?",
+            question: "Welcher zukünftige Einsatz von KI hat das größte Potenzial, das Bildungswesen zu prägen?",
             options: [
-                "Eine führende Rolle, die Lehrkräfte ersetzt",
-                "Eine unterstützende Rolle zur Entlastung von Lehrkräften",
-                "Eine zentrale Rolle bei der standardisierten Prüfungsentwicklung",
-                "Eine experimentelle Rolle, nur in Pilotprojekten"
+                "Die vollständige Automatisierung von Schulabläufen",
+                "Die KI-gestützte Erstellung individueller Lehrmaterialien",
+                "Die Übernahme der Lehrerrolle durch generative KI",
+                "Die Schaffung standardisierter Lehrpläne für alle Schulen"
             ],
             answer: 1,
-            explanation: "Generative KI sollte Lehrkräfte unterstützen, um Arbeitsbelastungen zu verringern und mehr Zeit für die individuelle Betreuung der Schüler zu schaffen."
-        }
+            explanation: "Die Erstellung personalisierter Lehrmaterialien ermöglicht einen individuelleren und effizienteren Unterricht."
+        },
+        {
+            question: "Was ist die größte technische Herausforderung bei der Erstellung personalisierter Lernpläne durch KI?",
+            options: [
+                "Die KI benötigt sehr viel Rechenleistung, um personalisierte Inhalte zu erstellen",
+                "Ungenaue oder unvollständige Daten könnten zu fehlerhaften Lernempfehlungen führen",
+                "Die KI könnte Inhalte erstellen, die für Schüler schwer umzusetzen sind",
+                "Die Pläne könnten zu generisch sein und keine Personalisierung bieten"
+            ],
+            answer: 1,
+            explanation: "Die Qualität der personalisierten Lernpläne hängt direkt von der Genauigkeit und Vollständigkeit der zugrunde liegenden Daten ab. Fehlerhafte oder unvollständige Daten führen zu ungenauen Empfehlungen und sind die größte technische Herausforderung."
+        }*/
     ];
     
     const [userAnswers, setUserAnswers] = useState({});

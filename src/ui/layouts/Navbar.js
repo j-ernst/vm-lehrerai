@@ -22,19 +22,19 @@ export default function Navbar() {
         </Link>
         <Link
           className={`text-white text-md ${
-            pathname === "/wiki" ? "font-bold border-b-2 border-white" : ""
-          }`}
-          href="/wiki"
-        >
-          Wiki
-        </Link>
-        <Link
-          className={`text-white text-md ${
             pathname === "/quiz" ? "font-bold border-b-2 border-white" : ""
           }`}
           href="/quiz"
         >
           Quiz
+        </Link>
+        <Link
+          className={`text-white text-md ${
+            pathname === "/wiki" ? "font-bold border-b-2 border-white" : ""
+          }`}
+          href="/wiki"
+        >
+          Wiki
         </Link>
         <Link
           className={`text-white text-md ${
