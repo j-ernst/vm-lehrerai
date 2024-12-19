@@ -44,7 +44,8 @@ const useCasesPost = [
         title: "Unterrichtseinheit evaluieren",
         description: "Reflektiere den Erfolg deiner Unterrichtseinheit mit KI-gestützten Analysen und Verbesserungsvorschlägen",
         imgSrc: "/preview.jpg",
-        caseName: "material-erstellen"
+        caseName: "material-erstellen",
+        disable: true
     }
 ]
 
