@@ -7,7 +7,7 @@ import OutputWindow from "../OutputWindow";
 import axios from "axios";
 
 export default function MaterialErstellen() {
-    const { title, detailDescription, imgSrc } = useCasesPre[2];
+    const { title, detailDescription, imgSrc } = useCasesPre[1];
 
     const [inputs, setInputs] = useState({
         step1: "",
@@ -78,13 +78,15 @@ export default function MaterialErstellen() {
     };
 
     const generatePrompt = (steps, inputs) => {
-        const inputsWithContent = steps
-            .map((step, index) => {
-                const userInput = inputs[`step${index + 1}`];
-                const content = userInput || step.placeholder;
-                return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${content}`;
-            })
-            .join("\n\n");
+        // Check if all inputs are empty
+        const allInputsEmpty = Object.values(inputs).every(input => input === "");
+        console.log("All empty: ", allInputsEmpty)
+
+        const inputsWithContent = steps.map((step, index) => {
+            const userInput = inputs[`step${index + 1}`];
+            const content = allInputsEmpty ? step.placeholder : userInput || "";
+            return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${content}`;
+        }).join("\n\n");
 
         return `
             Erstelle auf Grundlage der unten angegebenen Informationen eine vollständige, strukturierte und methodisch abwechslungsreiche Unterrichtseinheit. Verwende dabei den Input der Lehrkraft, um einen klaren, zielgerichteten Plan zu entwickeln, der auf die Zielgruppe und die angestrebten Lernziele abgestimmt ist. Achte darauf, dass die Unterrichtseinheit eine sinnvolle Struktur hat, die Inhalte zielgerichtet vermittelt und flexibel an unterschiedliche Unterrichtsverläufe angepasst werden kann.
@@ -202,7 +204,7 @@ export default function MaterialErstellen() {
                     />
                 ))}
                 <GenerateButton
-                    text={"Materialidee erstellen"}
+                    text={"Einheit planen"}
                     func={handleSubmit}
                 />
                 <OutputWindow response={response} isLoading={isLoading} />

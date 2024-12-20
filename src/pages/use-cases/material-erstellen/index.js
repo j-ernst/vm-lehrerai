@@ -7,7 +7,7 @@ import OutputWindow from "../OutputWindow";
 import axios from "axios";
 
 export default function MaterialErstellen() {
-    const { title, detailDescription, imgSrc } = useCasesPre[0];
+    const { title, detailDescription, imgSrc } = useCasesPre[2];
 
     const [inputs, setInputs] = useState({
         step1: "",
@@ -67,9 +67,13 @@ export default function MaterialErstellen() {
     };
 
     const generatePrompt = (steps, inputs) => {
+        // Check if all inputs are empty
+        const allInputsEmpty = Object.values(inputs).every(input => input === "");
+        console.log("All empty: ", allInputsEmpty)
+
         const inputsWithContent = steps.map((step, index) => {
             const userInput = inputs[`step${index + 1}`];
-            const content = userInput || step.placeholder;
+            const content = allInputsEmpty ? step.placeholder : userInput || "";
             return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${content}`;
         }).join("\n\n");
     
