@@ -9,7 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'nav': '#282F56'
+        'nav': '#282F56',
+        'hover-nav': '#343c6e'
       },
     },
   },

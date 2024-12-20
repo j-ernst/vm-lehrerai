@@ -5,8 +5,26 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const pathname = usePathname();
 
+  const links = [
+    {
+      text: "Quiz",
+      href: "/quiz",
+      current: pathname === "/quiz" ? true : false
+    },
+    {
+      text: "Wiki",
+      href: "/wiki",
+      current: pathname === "/wiki" ? true : false
+    },
+    {
+      text: "Anwendungsfälle",
+      href: "/use-cases",
+      current: pathname === "/use-cases" ? true : false
+    }
+  ]
+
   return (
-    <div className="h-14 min-w-full bg-nav flex items-center justify-between">
+    <div className="h-16 min-w-full bg-nav flex items-center justify-between">
       {/* Logo Link */}
       <Link className="flex items-center gap-2 px-4" href="/">
         <p className="text-xl font-bold text-white">KI-Kompass</p>
@@ -14,36 +32,27 @@ export default function Navbar() {
       </Link>
 
       {/* Navigation Links */}
-      <div className="flex gap-8">
+      <div className="flex gap-16 items-center">
         <Link
           href="/"
         >
           <img className="fill-white w-6" src="/home-2.png" />
         </Link>
-        <Link
-          className={`text-white text-md ${
-            pathname === "/quiz" ? "font-bold border-b-2 border-white" : ""
-          }`}
-          href="/quiz"
-        >
-          Quiz
-        </Link>
-        <Link
-          className={`text-white text-md ${
-            pathname === "/wiki" ? "font-bold border-b-2 border-white" : ""
-          }`}
-          href="/wiki"
-        >
-          Wiki
-        </Link>
-        <Link
-          className={`text-white text-md ${
-            pathname.includes("/use-cases") ? "font-bold border-b-2 border-white" : ""
-          }`}
-          href="/use-cases"
-        >
-          Anwendungsfälle
-        </Link>
+        {
+          links.map((item, index) => {
+            return (
+              <Link
+                key={index}
+                className={`whitespace-nowrap rounded-md p-2 px-3 text-white text-lg font-medium
+                  ${item.current ? "underline underline-offset-8 decoration-2" : "hover:bg-hover-nav"}  
+                `}
+                href={item.href}
+              >
+                {item.text}
+              </Link>
+            )
+          })
+        }
       </div>
 
       {/* Invisible Logo for Layout */}

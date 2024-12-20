@@ -34,10 +34,10 @@ export default function Wiki() {
                     <p>
                         Prompting ist die Gestaltung von Eingaben, die KI-Modelle dazu bringen, gewünschte Ergebnisse zu liefern. Die Qualität des Prompts beeinflusst direkt die Ausgabe.
                     </p>
+                    <br></br>
                     <p>
                         <strong>Tipps für effektives Prompting:</strong>
-                    </p>
-                    <br></br>
+                    </p>                    
                     <ul className="list-disc ml-6">
                         <li>Klarheit: Präzise und verständlich formulieren, um Mehrdeutigkeiten zu vermeiden.</li>
                         <li>Kontext: Relevante Informationen bereitstellen, um bessere Antworten zu erzielen.</li>
@@ -169,7 +169,8 @@ export default function Wiki() {
     
     return (
         <div className="flex flex-col items-center p-6">
-            <div className="w-full max-w-5xl">
+            <p className="text-3xl text-black text-center mt-12">Wiki</p>
+            <div className="w-full max-w-5xl mt-4">
                 {/* Inhaltsverzeichnis */}
                 <div className="bg-blue-100 shadow-md rounded-lg p-6 mb-8">
                     <h2 className="text-2xl text-black font-semibold mb-4">Inhaltsverzeichnis</h2>
