@@ -32,7 +32,7 @@ export default function StepInput({
           value={value}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full h-24 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full h-24 p-2 border text-black border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       )}
     </div>
