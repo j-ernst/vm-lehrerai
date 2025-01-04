@@ -1,13 +1,14 @@
 import CaseTemplate from "../CaseTemplate";
 import { useCasesPre } from "@/pages/api/case-data";
 import StepInput from "../_StepInput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GenerateButton from "@/ui/GenerateButton";
 import OutputWindow from "../OutputWindow";
 import axios from "axios";
 
 export default function ReihenplanungGestalten() {
-    const { title, detailDescription, imgSrc } = useCasesPre[0];
+    const { title, detailDescription, imgSrc, steps, templates } =
+        useCasesPre[0];
 
     const [inputs, setInputs] = useState({
         step1: "",
@@ -16,57 +17,22 @@ export default function ReihenplanungGestalten() {
         step4: "",
         step5: "",
         step6: "",
-        step7: ""
+        step7: "",
     });
 
     const [response, setResponse] = useState(""); // State to hold API response
     const [isLoading, setIsLoading] = useState(false); // State for loading
     const [refineInput, setRefineInput] = useState(""); // Input for refining the output
 
-    const steps = [
-        {
-            title: "Klasse",
-            description: "Schreibe kurz etwas zu der Klasse, an die sich die Unterrichtsreihe richtet. Schulform, Fach, Klassenstufe, etc.",
-            placeholder: "Die Unterrichtsreihe richtet sich an eine 10. Klasse einer Gesamtschule im Fach Biologie. Die Klasse besteht aus 25 Schülerinnen und Schülern, mit einer durchschnittlichen Leistungsspanne und unterschiedlichen Interessen an Naturwissenschaften.",
-            allowDocumentUpload: false
-        },
-        {
-            title: "Thema",
-            description: "Schreibe kurz, um welches Thema es sich in der Unterrichtsreihe handeln soll.",
-            placeholder: "Photosynthese und ihre Bedeutung für das Leben auf der Erde.",
-            allowDocumentUpload: false
-        },
-        {
-            title: "Zielsetzung",
-            description: "Schreibe kurz, welche Ziele du mit der Unterrichtsreihe verfolgst und welche Kompetenzen und welches Wissen du vermitteln willst.",
-            placeholder: "Die Schülerinnen und Schüler sollen den Prozess der Photosynthese verstehen, ihre Bedeutung für Pflanzen und die Umwelt erkennen sowie in der Lage sein, diesen Prozess in eigenen Worten zu erklären. Sie sollen außerdem Kompetenzen im Experimentieren und Analysieren wissenschaftlicher Daten entwickeln.",
-            allowDocumentUpload: false
-        },
-        {
-            title: "Lehrplan als Orientierung hochladen",
-            description: "Lade den aktuellen Lehrplan hoch, um diesen als Referenzmaterial für die Erstellung des Plans zu nutzen. Schreibe alternativ auf, welche Themen Teil des Lehrplans sein sollen.",
-            placeholder: "Die Themen sollen den Lehrplananforderungen für die 10. Klasse Biologie entsprechen, einschließlich: -Zelluläre Prozesse, insbesondere Photosynthese. -Ökologische Zusammenhänge. -Praktische Experimente zur Untersuchung von Licht und Kohlendioxid in der Photosynthese.",
-            allowDocumentUpload: false
-        },
-        {
-            title: "Vergangene Unterrichtsreihe als Referenz hochladen",
-            description: "Lade den aktuellen Lehrplan hoch, um diesen als Referenzmaterial für die Erstellung des Plans zu nutzen. Schreibe alternativ auf, welche Themen teil des Lehrplans sein sollen.",
-            placeholder: "In der letzten Unterrichtsreihe haben wir das Thema ‚Zellstruktur und -funktionen‘ behandelt. Die Klasse kennt bereits grundlegende Begriffe wie Chloroplasten, Zellatmung und chemische Reaktionen.",
-            allowDocumentUpload: false
-        },
-        {
-            title: "Zeitraum",
-            description: "Schreibe die Dauer auf, die Unterrichtsreihe umfassen soll. Füge außerdem hinzu, auf wie viele Unterrichtsstunden pro Woche die Themen verteilt werden sollen.",
-            placeholder: "Die Unterrichtsreihe soll über 4 Wochen laufen und in zwei 90-minütigen Unterrichtseinheiten pro Woche umgesetzt werden.",
-            allowDocumentUpload: false
-        },
-        {
-            title: "Spezifikationen",
-            description: "Beschreibe, worauf die KI besonders bei der Erstellung der Reihenplanung achten soll und welche Wünsche es beinhalten soll.",
-            placeholder: "Die Unterrichtsreihe sollte interaktive Elemente wie Gruppenarbeiten und praktische Experimente beinhalten. Es soll darauf geachtet werden, dass Inhalte für Schülerinnen und Schüler mit unterschiedlichen Leistungsniveaus zugänglich sind. Außerdem sollten Aufgaben für besonders interessierte Schülerinnen und Schüler angeboten werden. Eine exemplarische Klausurvorbereitung in der letzten Woche wäre wünschenswert.",
-            allowDocumentUpload: false
+    // Load saved class description into step1 on component mount
+    useEffect(() => {
+        const savedClassDescription = localStorage.getItem("classDescription");
+        console.log("Saved class description: ", savedClassDescription);
+        if (savedClassDescription) {
+            console.log("Setting saved class description");
+            handleInputChange("step1", savedClassDescription);
         }
-    ];
+    }, []);
 
     const handleInputChange = (step, value) => {
         setInputs((prev) => ({ ...prev, [step]: value }));
@@ -74,19 +40,25 @@ export default function ReihenplanungGestalten() {
 
     const generatePrompt = (steps, inputs) => {
         // Check if all inputs are empty
-        const allInputsEmpty = Object.values(inputs).every(input => input === "");
-        console.log("All empty: ", allInputsEmpty)
+        const allInputsEmpty = Object.values(inputs).every(
+            (input) => input === ""
+        );
+        console.log("All empty: ", allInputsEmpty);
 
-        const inputsWithContent = steps.map((step, index) => {
-            const userInput = inputs[`step${index + 1}`];
-            const content = allInputsEmpty ? step.placeholder : userInput || "";
-            return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${content}`;
-        }).join("\n\n");
-        
+        const inputsWithContent = steps
+            .map((step, index) => {
+                const userInput = inputs[`step${index + 1}`];
+                const content = allInputsEmpty
+                    ? step.placeholder
+                    : userInput || "";
+                return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${content}`;
+            })
+            .join("\n\n");
+
         return `
             Erstelle eine vollständige und detaillierte Unterrichtsreihe basierend auf den unten angegebenen Informationen.
             
-            Verwende die Inputs der einzelnen Schritte, um eine umfassende und strukturierte Unterrichtsreihe zu entwickeln, die den Bedürfnissen der Lehrkraft und der Klasse entspricht. Beachte dabei die relevanten Lehrplananforderungen, die Zielsetzungen und spezifischen Wünsche.
+            Verwende die Inputs der einzelnen Schritte, um eine umfassende und strukturierte Unterrichtsreihe zu entwickeln, die den Bedürfnissen der Lehrkraft und der Klasse entspricht. Beachte dabei die relevanten Lehrplananforderungen, die Zielsetzungen und spezifischen Wünsche. Verteile die Inhalte über die Anzahl angegebener Stunden oder Einheiten. Die erstellten Inhalte sollen sehr umfassend sein.
             
             ${inputsWithContent}
             
@@ -108,21 +80,27 @@ export default function ReihenplanungGestalten() {
 
     const handleSubmit = async () => {
         try {
-            setIsLoading(true); // Start loading            
+            setIsLoading(true); // Start loading
 
             // Generate the prompt
-            const prompt = generatePrompt(steps, inputs);            
+            const prompt = generatePrompt(steps, inputs);
 
             // Send the request to the local API
-            const res = await axios.post('/api/chat', { message: prompt }, {
-                headers: { 'Content-Type': 'application/json' },
-            });
+            const res = await axios.post(
+                "/api/chat",
+                { message: prompt },
+                {
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
 
             // Set the API response
             setResponse(res.data.reply);
         } catch (error) {
-            console.error('Error communicating with the API:', error);
-            setResponse('Fehler beim Abrufen der Daten. Bitte versuche es erneut.');
+            console.error("Error communicating with the API:", error);
+            setResponse(
+                "Fehler beim Abrufen der Daten. Bitte versuche es erneut."
+            );
         } finally {
             setIsLoading(false); // Stop loading
         }
@@ -130,12 +108,12 @@ export default function ReihenplanungGestalten() {
 
     const handleRefine = async () => {
         if (!refineInput.trim()) {
-            alert("Bitte geben Sie eine Verfeinerung ein.");
+            alert("Bitte eine Verfeinerung eingeben.");
             return;
         }
 
         try {
-            setIsLoading(true);            
+            setIsLoading(true);
 
             const refinePrompt = `
                 Hier ist der vorherige Kontext und das generierte Ergebnis:
@@ -152,60 +130,133 @@ export default function ReihenplanungGestalten() {
                 Bitte aktualisiere das vorherige Ergebnis basierend auf der neuen Anweisung. Gib das Ergebnis im Markdown-Format zurück.
             `;
 
-            const res = await axios.post('/api/chat', { message: refinePrompt }, {
-                headers: { 'Content-Type': 'application/json' },
-            });
+            const res = await axios.post(
+                "/api/chat",
+                { message: refinePrompt },
+                {
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
 
             setResponse(res.data.reply); // Update the response with the refined result
             setRefineInput(""); // Clear the refine input field
         } catch (error) {
             console.error("Error refining output:", error);
-            setResponse("Fehler beim Verfeinern der Daten. Bitte versuchen Sie es erneut.");
+            setResponse(
+                "Fehler beim Verfeinern der Daten. Bitte versuchen Sie es erneut."
+            );
         } finally {
             setIsLoading(false);
         }
     };
 
+    const handleSelect = (event) => {
+        const selectedTitle = event.target.value;
+
+        if (selectedTitle === "") {
+            // User selected the default option; reset all inputs except step1
+            setInputs((prevInputs) => {
+                const newInputs = { step1: prevInputs.step1 };
+                Object.keys(prevInputs).forEach((key) => {
+                    // Reset all steps except step1
+                    if (key !== "step1") {
+                        newInputs[key] = "";
+                    }
+                });
+                return newInputs;
+            });
+        } else {
+            // Find the selected template based on the title
+            const selectedTemplate = templates.find(
+                (template) => template.title === selectedTitle
+            );
+
+            if (selectedTemplate) {
+                // Create a new inputs object with the existing step1 value
+                const newInputs = { step1: inputs.step1 };
+
+                // Populate step2 to step6 with the template content
+                selectedTemplate.content.forEach((content, index) => {
+                    newInputs[`step${index + 2}`] = content;
+                });
+
+                // Update the state with the new inputs
+                setInputs(newInputs);
+            }
+        }
+    };
+
     return (
         <div>
-            <CaseTemplate 
-                imgSrc={imgSrc} 
-                title={title} 
+            <CaseTemplate
+                imgSrc={imgSrc}
+                title={title}
                 detailDescription={detailDescription}
             >
+                <div className="mb-10 flex flex-col">
+                    <h2 className="text-lg font-medium text-gray-700">
+                        Vorlage vewenden (optional)
+                    </h2>
+                    <p className="text-gray-500">
+                        Nutze eine der Vorlagen, um Zeit bei der Eingabe zu
+                        sparen. Du kannst aber auch deinen eigenen Inhalt
+                        verwenden.
+                    </p>
+                    <div class="relative w-1/3 mt-2">
+                        <select onChange={handleSelect} class="appearance-none w-full p-2 pr-10 border border-gray-300 rounded-md">
+                            <option value="">-- Vorlage auswählen --</option>
+                            {templates.map((template, index) => {
+                                return (
+                                    <option value={template.title} key={index}>
+                                        {template.title}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg
+                                class="fill-current h-4 w-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
                 {steps.map((step, index) => (
                     <StepInput
                         title={`Schritt ${index + 1} - ${step.title}`}
                         description={step.description}
                         allowDocumentUpload={step.allowDocumentUpload}
+                        value={inputs[`step${index + 1}`]}
                         placeholder={step.placeholder}
-                        onInputChange={(value) => handleInputChange(`step${index + 1}`, value)}
+                        onInputChange={(value) =>
+                            handleInputChange(`step${index + 1}`, value)
+                        }
                         key={index}
                     />
                 ))}
-                <GenerateButton 
-                    text={'Unterrichtsreihe generieren'} 
-                    func={handleSubmit} 
+                <GenerateButton
+                    text={"Unterrichtsreihe generieren"}
+                    func={handleSubmit}
+                    isLoading={isLoading}
                 />
-                <OutputWindow 
-                    response={response} 
-                    isLoading={isLoading} 
-                />
+                <OutputWindow response={response} isLoading={isLoading} />
                 {/* Refine Section */}
                 <div className="mt-6">
                     <textarea
                         className="w-full p-3 border border-gray-300 rounded-md"
                         rows="3"
-                        placeholder="Geben Sie zusätzliche Anweisungen ein, um das Ergebnis zu verfeinern..."
+                        placeholder="Gib zusätzliche Anweisungen ein, um das Ergebnis zu verfeinern..."
                         value={refineInput}
                         onChange={(e) => setRefineInput(e.target.value)}
                     />
-                    <button
-                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                        onClick={handleRefine}
-                    >
-                        Verfeinern
-                    </button>
+                    <GenerateButton
+                        text={"Ergebnis verfeinern"}
+                        func={handleRefine}
+                        isLoading={isLoading}
+                    />
                 </div>
             </CaseTemplate>
         </div>

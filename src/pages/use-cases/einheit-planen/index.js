@@ -1,13 +1,14 @@
 import CaseTemplate from "../CaseTemplate";
 import { useCasesPre } from "@/pages/api/case-data";
 import StepInput from "../_StepInput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import GenerateButton from "@/ui/GenerateButton";
 import OutputWindow from "../OutputWindow";
 import axios from "axios";
 
-export default function MaterialErstellen() {
-    const { title, detailDescription, imgSrc } = useCasesPre[1];
+export default function EinheitPlanen() {
+    const { title, detailDescription, imgSrc, steps, templates } =
+        useCasesPre[1];
 
     const [inputs, setInputs] = useState({
         step1: "",
@@ -23,55 +24,15 @@ export default function MaterialErstellen() {
     const [isLoading, setIsLoading] = useState(false); // State for loading
     const [refineInput, setRefineInput] = useState(""); // Input for refining the output
 
-    const steps = [
-        {
-            title: "Informationen zur Klasse",
-            description:
-                "Schreibe kurz etwas zu der Klasse, an die sich die Einheit richten soll. Schulform, Fach, Klassenstufe, Vorwissen, etc.",
-            placeholder:
-                "Das Material richtet sich an eine 9. Klasse eines Gymnasiums im Fach Deutsch. Die Klasse besteht aus 28 Schüler:innen mit unterschiedlichen Vorkenntnissen im Umgang mit literarischen Texten. Grundlegende Analysefähigkeiten (z. B. Erzählperspektive, Stilmittel) wurden bereits behandelt.",
-            allowDocumentUpload: false,
-        },
-        {
-            title: "Zielsetzung der Stunde",
-            description:
-                "Schreibe kurz, welche konkreten Kompetenzen und welches Wissen die SuS erwerben sollen. Unterscheide dabei auch gerne zwischen kognitiven, methodischen und sozialen Zielen. Füge auch einen Bezug zu Blooms Taxonomie hinzu.",
-            placeholder:
-                "Die Schüler:innen sollen die Kurzgeschichte „Nachts schlafen die Ratten doch“ von Wolfgang Borchert lesen und verstehen. Sie sollen die Erzählperspektive erkennen, zentrale Stilmittel benennen und die inhaltlichen Motive (z. B. Krieg und Verlust) in eigenen Worten beschreiben. Kompetenzen: Kognitiv: Verständnis von Stilmitteln und Erzählstruktur. Methodisch: Entwicklung der Fähigkeit zur Textanalyse. Sozial: Diskussion von ethischen Fragen und Empathie für literarische Figuren.",
-            allowDocumentUpload: false,
-        },
-        {
-            title: "Thema",
-            description:
-                "Notiere, um welches Thema es sich in der Einheit handeln soll.",
-            placeholder:
-                "Analyse der Kurzgeschichte „Nachts schlafen die Ratten doch“ von Wolfgang Borchert.",
-            allowDocumentUpload: false,
-        },
-        {
-            title: "Bearbeitungszeit",
-            description: "Schreibe kurz die Gesamtdauer der Einheit.",
-            placeholder:
-                "Die Unterrichtseinheit dauert 45 Minuten. Die Bearbeitung des Arbeitsmaterials (Lesen und Analyse der Geschichte) nimmt 20 Minuten in Anspruch, gefolgt von einer 15-minütigen Diskussion im Plenum und einem 10-minütigen Abschluss, in dem die Schüler:innen ihre Erkenntnisse zusammenfassen.",
-            allowDocumentUpload: false,
-        },
-        {
-            title: "Differenzierung und Anpassung",
-            description:
-                "Schreibe kurz, inwiefern unterschiedliche Lernniveaus in der Einheit berücksichtigt werden sollen.",
-            placeholder:
-                "Für Schüler:innen mit schwächeren Lesefähigkeiten wird ein vereinfachter Lesetext bereitgestellt. Für leistungsstarke Schüler:innen gibt es eine Zusatzaufgabe, in der sie die Beziehung zwischen den Figuren kritisch analysieren und alternative Titel für die Geschichte vorschlagen. Zusätzlich können visuelle Hilfsmittel wie eine Mindmap zur Strukturierung der Gedanken eingesetzt werden.",
-            allowDocumentUpload: false,
-        },
-        {
-            title: "Spezifikationen",
-            description:
-                "Beschreibe, worauf die KI besonders bei der Erstellung der Einheit achten soll und welche Wünsche es beinhalten soll. Spezifiziere hier z.B. falls du Präferenzen bei Materialtypen und Methoden hast, die verwendet werden sollen.",
-            placeholder:
-                "Die Einheit soll interaktive Elemente enthalten, z. B. eine Gruppenarbeit zur Stilmittelanalyse und eine abschließende Diskussion zur ethischen Botschaft der Geschichte. Das Material sollte für alle Schüler:innen zugänglich sein, mit klar strukturierten Aufgaben und einer Reflexionsfrage zum Schluss. Diagramme oder eine visuelle Übersicht zur Erzählstruktur wären wünschenswert.",
-            allowDocumentUpload: false,
-        },
-    ];
+    // Load saved class description into step1 on component mount
+    useEffect(() => {
+        const savedClassDescription = localStorage.getItem("classDescription");
+        console.log("Saved class description: ", savedClassDescription);
+        if (savedClassDescription) {
+            console.log("Setting saved class description");
+            handleInputChange("step1", savedClassDescription);
+        }
+    }, []);
 
     const handleInputChange = (step, value) => {
         setInputs((prev) => ({ ...prev, [step]: value }));
@@ -79,14 +40,20 @@ export default function MaterialErstellen() {
 
     const generatePrompt = (steps, inputs) => {
         // Check if all inputs are empty
-        const allInputsEmpty = Object.values(inputs).every(input => input === "");
-        console.log("All empty: ", allInputsEmpty)
+        const allInputsEmpty = Object.values(inputs).every(
+            (input) => input === ""
+        );
+        console.log("All empty: ", allInputsEmpty);
 
-        const inputsWithContent = steps.map((step, index) => {
-            const userInput = inputs[`step${index + 1}`];
-            const content = allInputsEmpty ? step.placeholder : userInput || "";
-            return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${content}`;
-        }).join("\n\n");
+        const inputsWithContent = steps
+            .map((step, index) => {
+                const userInput = inputs[`step${index + 1}`];
+                const content = allInputsEmpty
+                    ? step.placeholder
+                    : userInput || "";
+                return `### ${step.title}\n${step.description}\n**Eingabe der Lehrkraft:** ${content}`;
+            })
+            .join("\n\n");
 
         return `
             Erstelle auf Grundlage der unten angegebenen Informationen eine vollständige, strukturierte und methodisch abwechslungsreiche Unterrichtseinheit. Verwende dabei den Input der Lehrkraft, um einen klaren, zielgerichteten Plan zu entwickeln, der auf die Zielgruppe und die angestrebten Lernziele abgestimmt ist. Achte darauf, dass die Unterrichtseinheit eine sinnvolle Struktur hat, die Inhalte zielgerichtet vermittelt und flexibel an unterschiedliche Unterrichtsverläufe angepasst werden kann.
@@ -114,10 +81,10 @@ export default function MaterialErstellen() {
 
     const handleSubmit = async () => {
         try {
-            setIsLoading(true); // Start loading            
+            setIsLoading(true); // Start loading
 
             // Generate the prompt
-            const prompt = generatePrompt(steps, inputs);            
+            const prompt = generatePrompt(steps, inputs);
 
             // Send the request to the local API
             const res = await axios.post(
@@ -142,12 +109,12 @@ export default function MaterialErstellen() {
 
     const handleRefine = async () => {
         if (!refineInput.trim()) {
-            alert("Bitte geben Sie eine Verfeinerung ein.");
+            alert("Bitte eine Verfeinerung eingeben.");
             return;
         }
 
         try {
-            setIsLoading(true);            
+            setIsLoading(true);
 
             const refinePrompt = `
                 Hier ist der vorherige Kontext und das generierte Ergebnis:
@@ -184,6 +151,42 @@ export default function MaterialErstellen() {
         }
     };
 
+    const handleSelect = (event) => {
+        const selectedTitle = event.target.value;
+
+        if (selectedTitle === "") {
+            // User selected the default option; reset all inputs except step1
+            setInputs((prevInputs) => {
+                const newInputs = { step1: prevInputs.step1 };
+                Object.keys(prevInputs).forEach((key) => {
+                    // Reset all steps except step1
+                    if (key !== "step1") {
+                        newInputs[key] = "";
+                    }
+                });
+                return newInputs;
+            });
+        } else {
+            // Find the selected template based on the title
+            const selectedTemplate = templates.find(
+                (template) => template.title === selectedTitle
+            );
+
+            if (selectedTemplate) {
+                // Create a new inputs object with the existing step1 value
+                const newInputs = { step1: inputs.step1 };
+
+                // Populate step2 to step6 with the template content
+                selectedTemplate.content.forEach((content, index) => {
+                    newInputs[`step${index + 2}`] = content;
+                });
+
+                // Update the state with the new inputs
+                setInputs(newInputs);
+            }
+        }
+    };
+
     return (
         <div>
             <CaseTemplate
@@ -191,11 +194,46 @@ export default function MaterialErstellen() {
                 title={title}
                 detailDescription={detailDescription}
             >
+                <div className="mb-10 flex flex-col">
+                    <h2 className="text-lg font-medium text-gray-700">
+                        Vorlage vewenden (optional)
+                    </h2>
+                    <p className="text-gray-500">
+                        Nutze eine der Vorlagen, um Zeit bei der Eingabe zu
+                        sparen. Du kannst aber auch deinen eigenen Inhalt
+                        verwenden.
+                    </p>
+                    <div class="relative w-1/3 mt-2">
+                        <select
+                            onChange={handleSelect}
+                            class="appearance-none w-full p-2 pr-10 border border-gray-300 rounded-md"
+                        >
+                            <option value="">-- Vorlage auswählen --</option>
+                            {templates.map((template, index) => {
+                                return (
+                                    <option value={template.title} key={index}>
+                                        {template.title}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg
+                                class="fill-current h-4 w-4"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
                 {steps.map((step, index) => (
                     <StepInput
                         title={`Schritt ${index + 1} - ${step.title}`}
                         description={step.description}
                         allowDocumentUpload={step.allowDocumentUpload}
+                        value={inputs[`step${index + 1}`]}
                         placeholder={step.placeholder}
                         onInputChange={(value) =>
                             handleInputChange(`step${index + 1}`, value)
@@ -203,9 +241,10 @@ export default function MaterialErstellen() {
                         key={index}
                     />
                 ))}
-                <GenerateButton
-                    text={"Einheit planen"}
-                    func={handleSubmit}
+                <GenerateButton 
+                    text={"Einheit planen"} 
+                    func={handleSubmit} 
+                    isLoading={isLoading} 
                 />
                 <OutputWindow response={response} isLoading={isLoading} />
                 {/* Refine Section */}
@@ -213,16 +252,15 @@ export default function MaterialErstellen() {
                     <textarea
                         className="w-full p-3 border border-gray-300 rounded-md"
                         rows="3"
-                        placeholder="Geben Sie zusätzliche Anweisungen ein, um das Ergebnis zu verfeinern..."
+                        placeholder="Gib zusätzliche Anweisungen ein, um das Ergebnis zu verfeinern..."
                         value={refineInput}
                         onChange={(e) => setRefineInput(e.target.value)}
                     />
-                    <button
-                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                        onClick={handleRefine}
-                    >
-                        Verfeinern
-                    </button>
+                    <GenerateButton
+                        text={"Ergebnis verfeinern"}
+                        func={handleRefine}
+                        isLoading={isLoading}
+                    />
                 </div>
             </CaseTemplate>
         </div>
