@@ -40,7 +40,7 @@ export default function UseCases() {
                         }`}
                         readOnly={isSaved} // Lock input when saved
                         rows="3"
-                        placeholder="Beispiel: Das Material richtet sich an eine 9. Klasse eines Gymnasiums im Fach Deutsch. Die Klasse besteht aus 28 Schüler:innen mit unterschiedlichen Vorkenntnissen im Umgang mit literarischen Texten. Grundlegende Analysefähigkeiten (z. B. Erzählperspektive, Stilmittel) wurden bereits behandelt."
+                        placeholder="Beispiel: 9. Klasse eines Gymnasiums im Fach Deutsch. Die Klasse besteht aus 28 Schüler:innen mit unterschiedlichen Vorkenntnissen im Umgang mit literarischen Texten. Grundlegende Analysefähigkeiten (z. B. Erzählperspektive, Stilmittel) wurden bereits behandelt."
                         value={classInfo} // Bind value to state
                         onChange={(e) => setClassInfo(e.target.value)} // Update state on input
                     />
