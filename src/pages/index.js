@@ -11,7 +11,7 @@ export default function Home() {
                         Wissenslücken schließen und praxisnahe Anwendungsfälle
                         kennenlernen. Schritt für Schritt zeigen wir dir, wie du
                         KI-gestützte Tools effektiv einsetzen kannst, um deine
-                        Unterrichtsvorbereitung zu erleichtern und zu
+                        Unterrichtsplanung zu erleichtern und zu
                         verbessern.
                     </p>
                 </div>

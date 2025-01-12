@@ -128,6 +128,7 @@ export default function Quiz (){
             explanation: q.explanation
         }));
         setResults(evaluatedResults);
+        window.scrollTo(0,0)
     };
 
     return (
