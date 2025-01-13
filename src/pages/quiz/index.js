@@ -133,8 +133,9 @@ export default function Quiz (){
 
     return (
         <div className="flex flex-col items-center w-screen mb-20">
-            <div className="mt-20 w-[60vw] flex flex-col items-center">
+            <div className="mt-20 w-[60vw] flex flex-col items-center gap-4">
                 <p className="text-3xl text-black text-center">Quiz</p>
+                <p className="w-[40vw] text-center">Das Quiz testet dein Wissen über die Grundlagen generativer KI. Bei einem guten Ergebnis kannst du direkt mit den Anwendungsfällen fortfahren. Solltest du weniger gut abschneiden, bietet dir das Wiki die Möglichkeit, die Grundlagen zu vertiefen.</p>
                 <div className="mt-4">
                     {quizContent.map((q, index) => (
                         <QuizSection
