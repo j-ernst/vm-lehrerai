@@ -56,6 +56,10 @@ export default function MaterialErstellen() {
             .join("\n\n");
 
         return `
+            ### Kontext
+            Deine Aufgabe ist es, Lehrkräften bei der Unterrichtsplanung zu unterstützen. 
+
+            ### Anweisung
             Erstelle auf Grundlage der unten angegebenen Informationen ein vollständiges, strukturiertes und kompetenzorientiertes Unterrichtsmaterial. Verwende dabei den Input der Lehrkraft, um ein an die Zielgruppe angepasstes Material zu entwickeln, das methodisch abwechslungsreich und flexibel ist. Achte darauf, dass das Material die gewünschten Lernziele erfüllt, verschiedene Leistungsniveaus berücksichtigt und praktisch umsetzbar ist.
             Fasse am Anfang deiner Ausgabe kurz die Inputs der Lehrkraft zusammen. Der Fokus soll aber auf dem erstellten Material liegen.
             Nutze folgende Informationen als Basis für deine Erstellung:
